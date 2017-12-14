@@ -2,74 +2,121 @@ const prompt = require('prompt-promise');
 const chalk = require('chalk');
 console.log(chalk.yellow('H A N G M A N'));
 
-// VARIABLES 
+// GAME VARIABLES 
 let word = ''; // value declared in setupGame function
+let tracker = ''; // mutable word proxy
 let count = 0; // word.length value declared in setupGame function
 let hangman = [];
 let countdown = [];
-const invalidWordInputs = /\W|[0-9]/;
-const displayHangman = () => console.log(chalk.blue(hangman.join('')));
+const invalidInputs = /\W|[0-9]/;
+const displayHangman = () => console.log(chalk.magenta(hangman.join('')));
 
 // FUNCTIONS 
-function checkWordInvalid(value) { 
-    return invalidWordInputs.test(value);
+function checkWordInputInvalid(value) {
+    return invalidInputs.test(value);
 }
 
-function setupGame(value) {
-    if (checkWordInvalid(value) === true) {
+function checkLetterInputInvalid(letter) {
+    if (letter.length > 1) {
+        console.log(chalk.red('Invalid Input'));
+        console.log(chalk.red('Too many letters! Guess just one.'));
+        return true;
+    } else if (invalidInputs.test(letter)) {
         console.log(chalk.red('Invalid Input'));
         console.log('You must only use lower case letters A - Z for your word, and no spaces or punctuation.');
-        prompt('Enter a new word for Hangman: ').then(setupGame);
-    } else {
-        word = value.toLowerCase();
-        count = value.length;
-        countdown = word.split('');
-       
-        for (let i = 0; i < count; i++) {
-            hangman.push('_ ');
-        }
-    console.log('The hangman word is: ' + word);
-    prompt('Press any key to start playing.').then(start);
+        return true;
     }
+    return false;
 }
 
-function start(anyKey) {
-    console.log(chalk.yellow('H A N G M A N. You need to guess the ' + count + '-letter word: '));
+function passLetter(letter) {
+    let index = tracker.indexOf(letter);
+    countdown.pop();
+    tracker = tracker.replace(letter, 0);
+    hangman.splice(index, 1, letter + ' ');
+    //console.log(tracker, word, letter, index);
+    //console.log(countdown);
     displayHangman();
-    prompt('Guess a letter: ').then(guess);
-}
-
-function guess(letter) {
-    if (hangman.includes('_ ')) {
-        checkLetter(letter);
-        prompt('Guess another letter: ').then(guess);
-    } else {
+    if (countdown.length == 0) {
         console.log(chalk.green('You guessed the word!'));
-        displayHangman();
-        prompt.done();
     }
+
 }
 
 function checkLetter(letter) {
-    // if (val != ) check not a number
-    if (letter.length > 1) {
-        console.log(chalk.red('Incorrect input type - too many letters!'));
-    } else if (word.includes(letter)) {
+    if (checkLetterInputInvalid(letter) === true) {
+        guess();
+    } else if (tracker.includes(letter)) {
         console.log(chalk.green('You guessed a letter correctly!'));
-        let index = word.indexOf(val);
-        let leter = word.charAt(index);
-        word = word.replace(leter, '_'); // hold this in an array an pop off an array. 
-        hangman.splice(index, 1, val + ' ');
-        displayHangman();
+        passLetter(letter);
     } else {
         console.log(chalk.red('Wrong!'));
     }
 }
 
+function guess(letter) {
+    checkLetter(letter);
+    if (countdown.length === 0) {
+        prompt('Play again? Yes or No: ').then(playAgain);
+    } else {
+        prompt('Guess another letter: ').then(guess);
+    }
+}
+
+function start(anyKey) {
+    console.log(chalk.yellow('H A N G M A N.'));
+    console.log(chalk.yellow('You need to guess the ' + count + '-letter word: '));
+    displayHangman();
+    prompt('Guess a letter: ').then(guess);
+}
+
+function setupGame(value) {
+    if (checkWordInputInvalid(value) === true) {
+        console.log(chalk.red('Invalid Input'));
+        console.log('You must only use lower case letters A - Z for your word, and no spaces or punctuation.');
+        prompt('Enter a new word for Hangman: ').then(setupGame);
+    } else {
+        word = value.toLowerCase();
+        tracker = value.toLowerCase();
+        count = value.length;
+        countdown = word.split('');
+        for (let i = 0; i < count; i++) {
+            hangman.push('_ ');
+        }
+        console.log('The hangman word is: ' + word);
+        prompt('Press any key to start playing.').then(start);
+    }
+}
+
+function playAgain(answer) {
+    answer = answer.toLowerCase();
+    if (answer === 'yes' || answer === 'y') {
+        word = ''; 
+        tracker = ''; 
+        count = 0; 
+        hangman = [];
+        countdown = [];
+        newGame();
+    } else if (answer === 'no' || answer === 'n') {
+        console.log((chalk.yellow('Thanks for playing! Bye Bye!')));
+        prompt.done;
+        process.exit();
+    } else {
+        prompt.done;
+        process.exit();
+    }
+}
+
+function newGame() {
+    prompt('Enter a word for Hangman: ').then(setupGame).catch(function rejected(err) {
+        console.log('error: ', err.stack);
+        prompt.finish();
+    });
+}
+
 // COMMAND LINE PROMPT
 
-prompt('Enter a word for Hangman: ').then(setupGame).catch(function rejected(err) {
-    console.log('error: ', err.stack);
-    prompt.finish();
-});
+newGame();
+
+
 
