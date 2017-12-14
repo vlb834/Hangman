@@ -11,7 +11,7 @@ let countdown = [];
 const invalidInputs = /\W|[0-9]/;
 const displayHangman = () => console.log(chalk.magenta(hangman.join('')));
 
-// FUNCTIONS 
+// FUNCTIONS
 function checkWordInputInvalid(value) {
     return invalidInputs.test(value);
 }
@@ -23,7 +23,7 @@ function checkLetterInputInvalid(letter) {
         return true;
     } else if (invalidInputs.test(letter)) {
         console.log(chalk.red('Invalid Input'));
-        console.log('You must only use lower case letters A - Z for your word, and no spaces or punctuation.');
+        console.log(chalk.red('You must only use lower case letters A - Z for your word, and no spaces or punctuation.'));
         return true;
     }
     return false;
@@ -34,30 +34,26 @@ function passLetter(letter) {
     countdown.pop();
     tracker = tracker.replace(letter, 0);
     hangman.splice(index, 1, letter + ' ');
-    //console.log(tracker, word, letter, index);
-    //console.log(countdown);
-    displayHangman();
-    if (countdown.length == 0) {
-        console.log(chalk.green('You guessed the word!'));
-    }
-
+    console.log(tracker, word, letter, index);
+    console.log(countdown);
 }
 
 function checkLetter(letter) {
-    if (checkLetterInputInvalid(letter) === true) {
-        guess();
+    if (checkLetterInputInvalid(letter)) {
+        return;
     } else if (tracker.includes(letter)) {
         console.log(chalk.green('You guessed a letter correctly!'));
         passLetter(letter);
     } else {
-        console.log(chalk.red('Wrong!'));
+        console.log(chalk.red('Wrong!')); 
     }
+    displayHangman();   
 }
 
 function guess(letter) {
     checkLetter(letter);
-    if (countdown.length === 0) {
-        prompt('Play again? Yes or No: ').then(playAgain);
+    if (countdown.length == 0) {
+        console.log(chalk.green('You guessed the word!'));        prompt('Play again? Yes or No: ').then(playAgain);
     } else {
         prompt('Guess another letter: ').then(guess);
     }
@@ -99,18 +95,17 @@ function playAgain(answer) {
         newGame();
     } else if (answer === 'no' || answer === 'n') {
         console.log((chalk.yellow('Thanks for playing! Bye Bye!')));
-        prompt.done;
-        process.exit();
+        prompt.finish(); // same as process.exit();
     } else {
-        prompt.done;
-        process.exit();
+        prompt.finish(); // same as process.exit();
+       
     }
 }
 
 function newGame() {
     prompt('Enter a word for Hangman: ').then(setupGame).catch(function rejected(err) {
         console.log('error: ', err.stack);
-        prompt.finish();
+        prompt.finish(); // same as process.exit();
     });
 }
 
