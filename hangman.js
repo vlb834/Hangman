@@ -36,13 +36,8 @@ function passLetter(letter) {
     hangman.splice(index, 1, letter + ' ');
 }
 
-
-
-function checkGuess(letterInput) {
-    if (letterInput.toLowerCase() === word) {
-            countdown = [];
-            hangman = word.toLowerCase().split('');
-    } else if (checkLetterInputValid(letterInput)) {
+function checkLetter(letterInput) {
+    if (checkLetterInputValid(letterInput)) {
         let letter = letterInput.toLowerCase();
         if (tracker.includes(letter)) {
             console.log(chalk.green('You guessed a letter correctly!'));
@@ -52,6 +47,15 @@ function checkGuess(letterInput) {
         }
     } else {
         return;
+    }
+}
+
+function checkGuess(letterInput) {
+    if (letterInput.toLowerCase() === word) {
+        countdown = [];
+        hangman = word.toLowerCase().split('');
+    } else {
+        checkLetter(letterInput);
     }
     displayHangman();
 }
