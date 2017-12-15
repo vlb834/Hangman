@@ -36,8 +36,13 @@ function passLetter(letter) {
     hangman.splice(index, 1, letter + ' ');
 }
 
-function checkLetter(letterInput) {
-    if (checkLetterInputValid(letterInput)) {
+
+
+function checkGuess(letterInput) {
+    if (letterInput.toLowerCase() === word) {
+            countdown = [];
+            hangman = word.toLowerCase().split('');
+    } else if (checkLetterInputValid(letterInput)) {
         let letter = letterInput.toLowerCase();
         if (tracker.includes(letter)) {
             console.log(chalk.green('You guessed a letter correctly!'));
@@ -52,8 +57,7 @@ function checkLetter(letterInput) {
 }
 
 function guess(letterInput) {
-    // add a check wordInput function here if player guesses the whole word. 
-    checkLetter(letterInput);
+    checkGuess(letterInput);
     if (countdown.length == 0) {
         console.log(chalk.green('You guessed the word!')); prompt('Play again? Yes or No: ').then(playAgain);
     } else {
