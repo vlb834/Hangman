@@ -1,5 +1,6 @@
 const prompt = require('prompt-promise');
 const chalk = require('chalk');
+const hangmanFigure = require('hangman-ascii');
 console.log(chalk.yellow('H A N G M A N'));
 
 // GAME VARIABLES 
@@ -7,7 +8,8 @@ let word = ''; // value declared in setupGame function
 let tracker = ''; // mutable word proxy to display hangman to player correctly
 let count = 0; // word.length value declared in setupGame function
 let hangman = []; // displayed to player
-let countdown = []; // needed to if word guess is complete
+let countdown = []; // needed to determine if word guess is complete
+let turns = 0; // guess turns left before you hang
 const validInputs = /^[a-zA-Z]+$/; // check everything from start to end of string contains only letters
 const displayHangman = () => console.log(chalk.magenta(hangman.join('')));
 
@@ -43,7 +45,18 @@ function checkLetter(letterInput) {
             console.log(chalk.green('You guessed a letter correctly!'));
             passLetter(letter);
         } else {
+            // move all of this into a new incorrect Guess function to pass in. 
+            turns = turns + 1;
+            let remainingTurns = 6 - turns;
+            hangmanFigure.drawLevel(turns, 'magenta');
             console.log(chalk.red('Wrong!'));
+            if (turns == 6) {
+                console.log(chalk.red('G A M E  O V E R'));
+                console.log(chalk.red('You ran out of incorrect guesses.'));
+                prompt('Play again? Yes or No: ').then(playAgain); //this exits back to guess function. NEED TO FIX
+            } else {
+                console.log(chalk.magenta('You have ' + remainingTurns + ' incorrect guesses left.'));
+            } 
         }
     } else {
         return;
@@ -73,6 +86,8 @@ function start(anyKey) {
     console.log(chalk.yellow('H A N G M A N.'));
     console.log(chalk.yellow('You need to guess the ' + count + '-letter word: '));
     displayHangman();
+    console.log(chalk.yellow('You have 6 incorrect guesses before you hang!'));
+    hangmanFigure.drawLevel(turns, 'magenta');
     prompt('Guess a letter: ').then(guess);
 }
 
