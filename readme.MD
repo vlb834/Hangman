@@ -65,16 +65,17 @@ Vist [https://www.npmjs.com/][npm link] and search for a package you might want 
 
 The NPM package page will have documention on how to install, call upon, and use each package. 
 
-For example, for **Chalk**
+For example, to install **Chalk** navigate to your project directory in the Terminal and type:
 
-To Install
 * Using npm: ```$ npm install chalk```
 * Using yarn: ```$ yarn add chalk```
+
+The package should instally in a couple seconds and a few lines of documentation will be printed. You are now ready to start using them. 
 
 
 #### 2. Activating packages within your JS file
 
-To use the package in a JS file, first you need to **require** the package and assign it to a constant variable:
+To use the package within a JS file, first you need to **require** the package and assign it to a constant variable:
 ```javascript
 const chalk = require('chalk');
 ```
@@ -86,6 +87,7 @@ const prompt = require('prompt-promise');
 const chalk = require('chalk');
 const hangmanFigure = require('hangman-ascii');
 ```
+
 
 #### 2. Using packages within your JS file
 
