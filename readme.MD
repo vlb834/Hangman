@@ -30,6 +30,7 @@ Once I created my ```game.js``` file, I could open it within VSCode and add the 
 
 ```
 console.log('hello world');
+```
 
 Switching back to the terminal, I make sure I am in the right Hangman directory and type ```node <filename>``` to run the JS file, in this case called ```game.js```
 
