@@ -41,17 +41,31 @@ $ node game.js
 
 And voila, ```hello world``` will display in the Terminal.  Now I was ready to attempt some coding. 
 
-### NPM Packages
+### Installin NPM Packages
 
 According to their website, [**NPM**][npm link] is a package registry of "almost half a million packages of free, reusable code — the largest software registry in the world." The make it easy to find, download and use existing JS code, by packaging it up into "plug in and play" type modules. 
 
-When you install an NPM package or module into your code directory, it becomes a code **"dependency"**. That it, your code is dependent on it to run properly. NPM also makes it easy to check for package updates and keep things running smoothly, so it's best described as a *Package Manager*.
+When you install an NPM *package* or *module* into your code directory, it becomes a code *"dependency"*. That it, your code is dependent on it to run properly. NPM also makes it easy to check for package updates and keep things running smoothly, so it's best described as a *Package Manager*.
 
-While NPM is automatically installed with Node.JS, it was recommended I use [**Yarn**][yarn link] instead as it had advantages and improvements to NPM. To be perfectly honest, I don't quite know enough about coding to understand the pros anc cons, but Yarn was easy to use and install (with Homebrew). 
+While NPM is automatically installed with Node.JS, it was recommended  that I use [**Yarn**][yarn link] instead as it has advantages and improvements to NPM. To be perfectly honest, I don't quite know enough about coding to understand the pros and cons, but Yarn was easy to use and install (with Homebrew). 
 
 [**Installation info for Yarn**][yarn link]
 
-In practice, when you install packages they will appear under a ```node_modules``` directiory in your Hangman directory. I recommend added this folder to your **.gitignore** file. 
+In practice, when you install packages they will appear under a ```node_modules``` directiory in your Hangman directory. I recommend added this folder to your **.gitignore** file.  You should ignore the files as well. 
+
+To note, Yarn installs the packages locally to your directory, not globally, so you will need to reinstall your favourite NPM packages each time. 
+
+#### 1. Search for Packages and Install them
+
+Vist [https://www.npmjs.com/][npm link] and search for a package you might want to use. I used the three below in my Hangman Game: 
+
+* [Chalk](https://www.npmjs.com/package/chalk)
+* [Prompt Promise] (https://www.npmjs.com/package/prompt-promise)
+* [hangman-ascii] (https://www.npmjs.com/package/hangman-ascii)
+
+#### 2. Activating Packages within your JS file
+
+
 
 
 [yarn link]: https://yarnpkg.com/en/docs/getting-started
