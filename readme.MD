@@ -41,7 +41,7 @@ $ node game.js
 
 And voila, ```hello world``` will display in the Terminal.  Now I was ready to attempt some coding. 
 
-### Installin NPM Packages
+### Installing NPM Packages
 
 According to their website, [**NPM**][npm link] is a package registry of "almost half a million packages of free, reusable code — the largest software registry in the world." The make it easy to find, download and use existing JS code, by packaging it up into "plug in and play" type modules. 
 
@@ -51,19 +51,46 @@ While NPM is automatically installed with Node.JS, it was recommended  that I us
 
 [**Installation info for Yarn**][yarn link]
 
-In practice, when you install packages they will appear under a ```node_modules``` directiory in your Hangman directory. I recommend added this folder to your **.gitignore** file.  You should ignore the files as well. 
+In practice, when you install packages they will appear under a ```node_modules``` directiory in your Hangman directory. I recommend added this folder to your *.gitignore* file.  You should ignore the files as well. 
 
-To note, Yarn installs the packages locally to your directory, not globally, so you will need to reinstall your favourite NPM packages each time. 
+To note, Yarn installs the packages locally to your directory, not globally, so you will need to re-install your favourite NPM packages in each project directory you want to use them in.  
 
-#### 1. Search for Packages and Install them
+#### 1. Search for packages and install them
 
 Vist [https://www.npmjs.com/][npm link] and search for a package you might want to use. I used the three below in my Hangman Game: 
 
-* [Chalk](https://www.npmjs.com/package/chalk)
-* [Prompt Promise] (https://www.npmjs.com/package/prompt-promise)
-* [hangman-ascii] (https://www.npmjs.com/package/hangman-ascii)
+* [Chalk](https://www.npmjs.com/package/chalk) - Terminal string styling (ie. colors, italics, bold, etc)
+* [Prompt Promise](https://www.npmjs.com/package/prompt-promise) - user-input (command prompt, confirm, multiline, password) as promises
+* [hangman-ascii](https://www.npmjs.com/package/hangman-ascii) - hangman ascii artwork 
 
-#### 2. Activating Packages within your JS file
+The NPM package page will have documention on how to install, call upon, and use each package. 
+
+For example, for **Chalk**
+
+To Install
+* Using npm: ```npm install chalk```
+* Using yarn: ```yarn add chalk```
+
+
+#### 2. Activating packages within your JS file
+
+To use the package in a JS file, first you need to **require** the package and assign it to a constant variable:
+```const chalk = require('chalk');```
+
+My three packages were "required" at the top of my JS hangman game file like so: 
+
+```javascript
+const prompt = require('prompt-promise');
+const chalk = require('chalk');
+const hangmanFigure = require('hangman-ascii');
+```
+
+#### 2. Using packages within your JS file
+
+Once the packaged has been *required*, then you can use it per the examples in the documentation. 
+
+For example, for Chalk:
+```console.log(chalk.blue('Hello world!'));```
 
 
 
