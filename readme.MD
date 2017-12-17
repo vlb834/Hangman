@@ -89,10 +89,15 @@ const hangmanFigure = require('hangman-ascii');
 
 Once the packaged has been *required*, then you can use it per the examples in the documentation. 
 
-For example, for Chalk:
-```console.log(chalk.blue('Hello world!'));```
+For example, for **Chalk**:
+```javascript
+console.log(chalk.blue('Hello world!'));```
 
+I'll elaborate a bit more on using the **Prompt-Promise** package in the next section about JS Promise Objects.
 
+### The JavaScript Promise Object
+
+To be cont'd...
 
 
 [yarn link]: https://yarnpkg.com/en/docs/getting-started
