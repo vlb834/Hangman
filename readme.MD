@@ -43,7 +43,7 @@ And voila, ```hello world``` will display in the Terminal.  Now I was ready to a
 
 ### Installing NPM Packages
 
-According to their website, [**NPM**][npm link] is a package registry of "almost half a million packages of free, reusable code — the largest software registry in the world." The make it easy to find, download and use existing JS code, by packaging it up into "plug in and play" type modules. 
+According to their website, [**NPM**][npm link] is a package registry of "almost half a million packages of free, reusable code — the largest software registry in the world." They make it easy to find, download and use existing JS code, by packaging it up into "plug in and play" type modules. 
 
 When you install an NPM *package* or *module* into your code directory, it becomes a code *"dependency"*. That it, your code is dependent on it to run properly. NPM also makes it easy to check for package updates and keep things running smoothly, so it's best described as a *Package Manager*.
 
