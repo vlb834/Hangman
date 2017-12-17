@@ -68,14 +68,16 @@ The NPM package page will have documention on how to install, call upon, and use
 For example, for **Chalk**
 
 To Install
-* Using npm: ```npm install chalk```
-* Using yarn: ```yarn add chalk```
+* Using npm: ```$ npm install chalk```
+* Using yarn: ```$ yarn add chalk```
 
 
 #### 2. Activating packages within your JS file
 
 To use the package in a JS file, first you need to **require** the package and assign it to a constant variable:
-```const chalk = require('chalk');```
+```javascript
+const chalk = require('chalk');
+```
 
 My three packages were "required" at the top of my JS hangman game file like so: 
 
