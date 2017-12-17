@@ -91,7 +91,8 @@ Once the packaged has been *required*, then you can use it per the examples in t
 
 For example, for **Chalk**:
 ```javascript
-console.log(chalk.blue('Hello world!'));```
+console.log(chalk.blue('Hello world!'));
+```
 
 I'll elaborate a bit more on using the **Prompt-Promise** package in the next section about JS Promise Objects.
 
